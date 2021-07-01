@@ -2,9 +2,7 @@
 
 <div class="list__block">
   <div class="list__inner">
-    <div class="list__item" v-for="twoot in twoots" :key="twoot.id">
-      {{ twoot.title }}
-    </div>
+    <TwootItem v-for="twoot in object_list" :key="twoot.id" :twoot="twoot" @favourite="toggleFavourite"/>
   </div>
 </div>
   
@@ -12,22 +10,17 @@
 
 <script>
 
+import TwootItem from './TwootItem.vue';
+
 export default  {
   name: 'ArticleList',
-  data () {
-    return {
-      twoots: [
-        {
-          id: 1,
-          content: "Matthijs is amazing",
-          title: "Matthijs"
-        },
-        {
-          id: 2,
-          content: "This is my second twoot",
-          title: "twotter"
-        }
-      ]
+  props: ["object_list"],
+  components: {
+    TwootItem
+  },
+  methods: {
+    toggleFavourite(id) {
+      console.log(`favourite twoot #${id}`)
     }
   }
 
